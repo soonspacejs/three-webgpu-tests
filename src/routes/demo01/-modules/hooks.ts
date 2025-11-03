@@ -1,5 +1,5 @@
 import { useEffect, type RefObject } from 'react';
-import { Color, GridHelper, UnsignedByteType } from 'three/webgpu';
+import { GridHelper, UnsignedByteType } from 'three/webgpu';
 import {
   pass,
   mrt,
@@ -26,12 +26,17 @@ export const useScene = (elRef: RefObject<HTMLElement | null>) => {
     if (viewer) {
       const { scene } = viewer;
 
-      scene.background = new Color(0x456342);
-
       const size = 10;
       const divisions = 10;
       const gridHelper = new GridHelper(size, divisions);
       scene.add(gridHelper);
+    }
+  }, [viewer]);
+
+  // load model
+  useEffect(() => {
+    if (viewer) {
+      //
     }
   }, [viewer]);
 

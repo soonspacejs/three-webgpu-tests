@@ -51,6 +51,7 @@ class Viewer extends EventDispatcher {
     const renderer = new WebGPURenderer({ antialias: true });
     renderer.setSize(this.el.clientWidth, this.el.clientHeight);
     renderer.shadowMap.enabled = true;
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setAnimationLoop(this.animate);
     renderer.inspector = new Inspector();
     this.el.appendChild(renderer.domElement);
@@ -70,6 +71,9 @@ class Viewer extends EventDispatcher {
 
   private _initControls() {
     const controls = new CameraControls(this.camera, this.renderer.domElement);
+    controls.minDistance = 0.2;
+    controls.smoothTime = 0.2;
+    controls.dollySpeed = 0.2;
     return controls;
   }
 
