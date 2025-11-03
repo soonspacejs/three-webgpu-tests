@@ -1,5 +1,5 @@
-import { useLayoutEffect, useState, type RefObject } from 'react';
-import { Color, UnsignedByteType } from 'three/webgpu';
+import { useEffect, type RefObject } from 'react';
+import { Color, GridHelper, UnsignedByteType } from 'three/webgpu';
 import {
   pass,
   mrt,
@@ -16,28 +16,29 @@ import {
 import { traa } from 'three/addons/tsl/display/TRAANode.js';
 import { ssgi } from 'three/addons/tsl/display/SSGINode.js';
 
-import { Viewer } from '@/u-space';
+import { useViewer } from '@/hooks';
 
-export const useScene = (elRef: RefObject<HTMLDivElement | null>) => {
-  const [viewer, setViewer] = useState<Viewer | null>(null);
+export const useScene = (elRef: RefObject<HTMLElement | null>) => {
+  const viewer = useViewer(elRef);
 
-  useLayoutEffect(() => {
-    if (elRef.current) {
-      const viewer = new Viewer({ el: elRef.current });
-
-      setViewer(viewer);
-
-      return () => {
-        viewer.dispose();
-      };
-    }
-  }, [elRef]);
-
-  useLayoutEffect(() => {
+  // scene
+  useEffect(() => {
     if (viewer) {
-      const { scene, camera, postProcessing } = viewer;
+      const { scene } = viewer;
 
       scene.background = new Color(0x456342);
+
+      const size = 10;
+      const divisions = 10;
+      const gridHelper = new GridHelper(size, divisions);
+      scene.add(gridHelper);
+    }
+  }, [viewer]);
+
+  // ssgi
+  useEffect(() => {
+    if (viewer) {
+      const { scene, camera, postProcessing } = viewer;
 
       //
 

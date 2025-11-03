@@ -64,7 +64,7 @@ class Viewer extends EventDispatcher {
 
   private _initCamera() {
     const camera = new PerspectiveCamera(50, this.el.clientWidth / this.el.clientHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.setScalar(5);
     return camera;
   }
 
