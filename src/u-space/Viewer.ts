@@ -1,4 +1,12 @@
-import { EventDispatcher, WebGPURenderer, Scene, PerspectiveCamera, PostProcessing, Timer } from 'three/webgpu';
+import {
+  EventDispatcher,
+  WebGPURenderer,
+  Scene,
+  PerspectiveCamera,
+  PostProcessing,
+  Timer,
+  ACESFilmicToneMapping,
+} from 'three/webgpu';
 import { Inspector } from 'three/addons/inspector/Inspector.js';
 import CameraControls from 'camera-controls';
 
@@ -48,10 +56,12 @@ class Viewer extends EventDispatcher {
   };
 
   private _initRenderer() {
-    const renderer = new WebGPURenderer({ antialias: true });
+    const renderer = new WebGPURenderer({ antialias: false });
     renderer.setSize(this.el.clientWidth, this.el.clientHeight);
     renderer.shadowMap.enabled = true;
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.toneMapping = ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 0.8;
+    // renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setAnimationLoop(this.animate);
     renderer.inspector = new Inspector();
     this.el.appendChild(renderer.domElement);
@@ -88,10 +98,10 @@ class Viewer extends EventDispatcher {
   }
 
   dispose() {
-    this.renderer.dispose();
-    this.postProcessing.dispose();
     this.el.removeChild(this.renderer.domElement);
     window.removeEventListener('resize', this.onWindowResize);
+    // this.renderer.dispose(); // hmr error
+    this.postProcessing.dispose();
   }
 }
 

@@ -1,9 +1,17 @@
-import { useLayoutEffect, useState, type RefObject } from 'react';
+import { useLayoutEffect, useMemo, useState, type RefObject } from 'react';
 
 import { Viewer } from '@/u-space';
 
+declare global {
+  interface Window {
+    viewer: Viewer;
+  }
+}
+
 function useViewer(elRef: RefObject<HTMLElement | null>) {
   const [viewer, setViewer] = useState<Viewer | null>(null);
+  const [ready, setReady] = useState(false);
+  const readyViewer = useMemo(() => (ready ? viewer : null), [ready, viewer]);
 
   useLayoutEffect(() => {
     if (elRef.current) {
@@ -11,13 +19,21 @@ function useViewer(elRef: RefObject<HTMLElement | null>) {
 
       setViewer(viewer);
 
+      window.viewer = viewer;
+
       return () => {
         viewer.dispose();
       };
     }
   }, [elRef]);
 
-  return viewer;
+  useLayoutEffect(() => {
+    if (viewer) {
+      viewer.renderer.init().then(() => setReady(true));
+    }
+  }, [viewer]);
+
+  return readyViewer;
 }
 
 export { useViewer };
