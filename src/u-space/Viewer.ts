@@ -17,6 +17,7 @@ export interface ViewerOptions {
 class Viewer extends EventDispatcher {
   el: HTMLElement;
   renderer: WebGPURenderer;
+  inspector: Inspector;
   scene: Scene;
   camera: PerspectiveCamera;
   controls: CameraControls;
@@ -28,6 +29,7 @@ class Viewer extends EventDispatcher {
 
     this.el = el;
     this.renderer = this._initRenderer();
+    this.inspector = this._initInspector();
     this.scene = this._initScene();
     this.camera = this._initCamera();
     this.controls = this._initControls();
@@ -63,9 +65,14 @@ class Viewer extends EventDispatcher {
     renderer.toneMappingExposure = 0.8;
     // renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setAnimationLoop(this.animate);
-    renderer.inspector = new Inspector();
     this.el.appendChild(renderer.domElement);
     return renderer;
+  }
+
+  private _initInspector() {
+    const inspector = new Inspector();
+    this.renderer.inspector = inspector;
+    return inspector;
   }
 
   private _initScene() {

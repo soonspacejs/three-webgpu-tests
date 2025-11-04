@@ -122,7 +122,7 @@ export const useScene = (elRef: RefObject<HTMLElement | null>) => {
   // ssgi
   useEffect(() => {
     if (viewer) {
-      const { scene, camera, postProcessing } = viewer;
+      const { scene, camera, postProcessing, inspector } = viewer;
 
       const scenePass = pass(scene, camera, {
         minFilter: NearestFilter,
@@ -174,6 +174,28 @@ export const useScene = (elRef: RefObject<HTMLElement | null>) => {
       const traaPass = traa(compositePass, scenePassDepth, scenePassVelocity, camera);
       postProcessing.outputNode = traaPass;
       postProcessing.needsUpdate = true;
+
+      // gui
+
+      const gui = inspector.createParameters('Settings');
+
+      const effectsFolder = gui.addFolder('Effects');
+
+      const params = {
+        enabled: true,
+      };
+
+      effectsFolder
+        .add(params, 'enabled')
+        .name('Effects Enabled')
+        .onChange((v) => {
+          if (v) {
+            postProcessing.outputNode = traaPass;
+          } else {
+            postProcessing.outputNode = scenePass;
+          }
+          postProcessing.needsUpdate = true;
+        });
 
       return () => {
         scenePass.dispose();
