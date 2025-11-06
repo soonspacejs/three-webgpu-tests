@@ -7,6 +7,7 @@ import {
   Timer,
   ACESFilmicToneMapping,
 } from 'three/webgpu';
+import { pass } from 'three/tsl';
 import { Inspector } from 'three/addons/inspector/Inspector.js';
 import CameraControls from 'camera-controls';
 
@@ -96,6 +97,7 @@ class Viewer extends EventDispatcher {
 
   private _initPostProcessing() {
     const postProcessing = new PostProcessing(this.renderer);
+    postProcessing.outputNode = pass(this.scene, this.camera);
     return postProcessing;
   }
 
