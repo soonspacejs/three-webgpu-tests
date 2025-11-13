@@ -5,7 +5,7 @@ import {
   PerspectiveCamera,
   PostProcessing,
   Timer,
-  ACESFilmicToneMapping,
+  AgXToneMapping,
   PCFShadowMap,
 } from 'three/webgpu';
 import { pass } from 'three/tsl';
@@ -65,7 +65,7 @@ class Viewer extends EventDispatcher {
     // renderer.highPrecision = true;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = PCFShadowMap;
-    renderer.toneMapping = ACESFilmicToneMapping;
+    renderer.toneMapping = AgXToneMapping;
     renderer.toneMappingExposure = 0.8;
     // renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setAnimationLoop(this.animate);
