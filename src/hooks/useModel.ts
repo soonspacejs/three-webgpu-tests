@@ -34,6 +34,8 @@ function useModel(viewer: Viewer | null) {
       loader.load('/models/F4.glb', (gltf) => {
         gltf.scene.traverse((child) => {
           if (child instanceof Mesh) {
+            child.receiveShadow = true;
+            child.castShadow = true;
             child.material.roughness = 1;
             child.material.metalness = 0;
 
@@ -52,16 +54,34 @@ function useModel(viewer: Viewer | null) {
         robotGroup.add(gltf.scene);
         gltf.scene.position.set(0, 0, 0.8);
         controls.fitToBox(gltf.scene, true);
+        gltf.scene.traverse((child) => {
+          if (child instanceof Mesh) {
+            child.receiveShadow = true;
+            child.castShadow = true;
+          }
+        });
       });
       loader.load('/models/x30-opt.glb', (gltf) => {
         modelSet.add(gltf.scene);
         robotGroup.add(gltf.scene);
         gltf.scene.position.set(0, -1, 0.66);
+        gltf.scene.traverse((child) => {
+          if (child instanceof Mesh) {
+            child.receiveShadow = true;
+            child.castShadow = true;
+          }
+        });
       });
       loader.load('/models/go2-opt.glb', (gltf) => {
         modelSet.add(gltf.scene);
         robotGroup.add(gltf.scene);
         gltf.scene.position.set(0, 1, 0.46);
+        gltf.scene.traverse((child) => {
+          if (child instanceof Mesh) {
+            child.receiveShadow = true;
+            child.castShadow = true;
+          }
+        });
       });
 
       return () => {

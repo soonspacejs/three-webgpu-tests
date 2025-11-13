@@ -6,6 +6,7 @@ import {
   PostProcessing,
   Timer,
   ACESFilmicToneMapping,
+  PCFShadowMap,
 } from 'three/webgpu';
 import { pass } from 'three/tsl';
 import { Inspector } from 'three/addons/inspector/Inspector.js';
@@ -59,9 +60,11 @@ class Viewer extends EventDispatcher {
   };
 
   private _initRenderer() {
-    const renderer = new WebGPURenderer({ antialias: false });
+    const renderer = new WebGPURenderer({ logarithmicDepthBuffer: false, antialias: false });
     renderer.setSize(this.el.clientWidth, this.el.clientHeight);
+    // renderer.highPrecision = true;
     renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = PCFShadowMap;
     renderer.toneMapping = ACESFilmicToneMapping;
     renderer.toneMappingExposure = 0.8;
     // renderer.setPixelRatio(window.devicePixelRatio);
