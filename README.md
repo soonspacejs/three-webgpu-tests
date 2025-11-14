@@ -2,9 +2,9 @@
 
 ## Screenshots
 
-<div style="display: grid;grid-template-columns:repeat(2, 1fr);gap:0 10px;">
-<img src="./screenshots/shot1.png" style="" />
-<img src="./screenshots/shot2.png" style="" />
+<div style="display: flex;gap:0 1px;">
+<img src="./screenshots/shot1.png" style="width: 49%" />
+<img src="./screenshots/shot2.png" style="width: 49%" />
 </div>
 
 ## Usage
