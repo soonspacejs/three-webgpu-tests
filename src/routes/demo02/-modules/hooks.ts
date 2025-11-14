@@ -22,7 +22,7 @@ const longitude = 120.002982,
 const geodetic = new Geodetic();
 const position = new Vector3();
 const date = new Date();
-date.setHours(16.5);
+date.setHours(15.5);
 
 const camer_poition = {
   x: 91.32403953927673,
