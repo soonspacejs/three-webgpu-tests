@@ -16,7 +16,12 @@ export interface ViewerOptions {
   el: HTMLElement;
 }
 
-class Viewer extends EventDispatcher {
+export interface ViewerEventMap {
+  'beforeRender': unknown;
+  'afterRender': unknown;
+}
+
+class Viewer extends EventDispatcher<ViewerEventMap> {
   el: HTMLElement;
   renderer: WebGPURenderer;
   inspector: Inspector;
@@ -56,11 +61,13 @@ class Viewer extends EventDispatcher {
 
     this.controls.update(this.timer.getDelta());
 
+    this.dispatchEvent({ type: 'beforeRender' });
     this.postProcessing.render();
+    this.dispatchEvent({ type: 'afterRender' });
   };
 
   private _initRenderer() {
-    const renderer = new WebGPURenderer({ logarithmicDepthBuffer: false, antialias: false });
+    const renderer = new WebGPURenderer({ logarithmicDepthBuffer: true, antialias: false });
     renderer.setSize(this.el.clientWidth, this.el.clientHeight);
     // renderer.highPrecision = true;
     renderer.shadowMap.enabled = true;

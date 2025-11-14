@@ -42,13 +42,14 @@ class Globe {
 
   _initTilesRenderer() {
     const tilesRenderer = new TilesRenderer();
+    tilesRenderer.errorTarget = 1;
     return tilesRenderer;
   }
 
   _initCesiumIonPlugin() {
     const cesiumIonPlugin = new CesiumIonAuthPlugin({
-      apiToken: 'YOUR_CESIUM_ION_ACCESS_TOKEN',
-      assetId: 'xxx',
+      apiToken: import.meta.env.VITE_CESIUM_ACCESS_TOKEN,
+      assetId: '2275207',
       autoRefreshToken: true,
     });
     this.tilesRenderer.registerPlugin(cesiumIonPlugin);
