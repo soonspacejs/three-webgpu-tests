@@ -18,4 +18,4 @@ pnpm run dev
 
 Create a `.env` file in the root directory with the following variables:
 
-- `VITE_CESIUM_ACCESS_TOKEN`: [Cesium Access Token](https://cesium.com/docs/cesiumjs-learn/cesium-on-the-web/)
+- `VITE_CESIUM_ACCESS_TOKEN`: [Cesium Access Token](https://cesium.com/learn/ion/cesium-ion-access-tokens/)
