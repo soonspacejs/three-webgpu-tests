@@ -7,6 +7,7 @@ import {
   Timer,
   AgXToneMapping,
   PCFShadowMap,
+  Color,
 } from 'three/webgpu';
 import { pass } from 'three/tsl';
 import { Inspector } from 'three/addons/inspector/Inspector.js';
@@ -88,6 +89,7 @@ class Viewer extends EventDispatcher<ViewerEventMap> {
 
   private _initScene() {
     const scene = new Scene();
+    scene.background = new Color(0x000000);
     return scene;
   }
 
