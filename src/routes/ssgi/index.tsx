@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { useScene } from './-modules';
 
-export const Route = createFileRoute('/demo01/')({
+export const Route = createFileRoute('/ssgi/')({
   component: RouteComponent,
 });
 

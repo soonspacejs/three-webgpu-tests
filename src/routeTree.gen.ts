@@ -10,63 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as Demo03IndexRouteImport } from './routes/demo03/index'
-import { Route as Demo02IndexRouteImport } from './routes/demo02/index'
-import { Route as Demo01IndexRouteImport } from './routes/demo01/index'
+import { Route as SsgiIndexRouteImport } from './routes/ssgi/index'
+import { Route as ComputeShaderIndexRouteImport } from './routes/compute-shader/index'
+import { Route as AtmosphereIndexRouteImport } from './routes/atmosphere/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Demo03IndexRoute = Demo03IndexRouteImport.update({
-  id: '/demo03/',
-  path: '/demo03/',
+const SsgiIndexRoute = SsgiIndexRouteImport.update({
+  id: '/ssgi/',
+  path: '/ssgi/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Demo02IndexRoute = Demo02IndexRouteImport.update({
-  id: '/demo02/',
-  path: '/demo02/',
+const ComputeShaderIndexRoute = ComputeShaderIndexRouteImport.update({
+  id: '/compute-shader/',
+  path: '/compute-shader/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const Demo01IndexRoute = Demo01IndexRouteImport.update({
-  id: '/demo01/',
-  path: '/demo01/',
+const AtmosphereIndexRoute = AtmosphereIndexRouteImport.update({
+  id: '/atmosphere/',
+  path: '/atmosphere/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/demo01': typeof Demo01IndexRoute
-  '/demo02': typeof Demo02IndexRoute
-  '/demo03': typeof Demo03IndexRoute
+  '/atmosphere': typeof AtmosphereIndexRoute
+  '/compute-shader': typeof ComputeShaderIndexRoute
+  '/ssgi': typeof SsgiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demo01': typeof Demo01IndexRoute
-  '/demo02': typeof Demo02IndexRoute
-  '/demo03': typeof Demo03IndexRoute
+  '/atmosphere': typeof AtmosphereIndexRoute
+  '/compute-shader': typeof ComputeShaderIndexRoute
+  '/ssgi': typeof SsgiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/demo01/': typeof Demo01IndexRoute
-  '/demo02/': typeof Demo02IndexRoute
-  '/demo03/': typeof Demo03IndexRoute
+  '/atmosphere/': typeof AtmosphereIndexRoute
+  '/compute-shader/': typeof ComputeShaderIndexRoute
+  '/ssgi/': typeof SsgiIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo01' | '/demo02' | '/demo03'
+  fullPaths: '/' | '/atmosphere' | '/compute-shader' | '/ssgi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo01' | '/demo02' | '/demo03'
-  id: '__root__' | '/' | '/demo01/' | '/demo02/' | '/demo03/'
+  to: '/' | '/atmosphere' | '/compute-shader' | '/ssgi'
+  id: '__root__' | '/' | '/atmosphere/' | '/compute-shader/' | '/ssgi/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  Demo01IndexRoute: typeof Demo01IndexRoute
-  Demo02IndexRoute: typeof Demo02IndexRoute
-  Demo03IndexRoute: typeof Demo03IndexRoute
+  AtmosphereIndexRoute: typeof AtmosphereIndexRoute
+  ComputeShaderIndexRoute: typeof ComputeShaderIndexRoute
+  SsgiIndexRoute: typeof SsgiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -78,25 +78,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo03/': {
-      id: '/demo03/'
-      path: '/demo03'
-      fullPath: '/demo03'
-      preLoaderRoute: typeof Demo03IndexRouteImport
+    '/ssgi/': {
+      id: '/ssgi/'
+      path: '/ssgi'
+      fullPath: '/ssgi'
+      preLoaderRoute: typeof SsgiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo02/': {
-      id: '/demo02/'
-      path: '/demo02'
-      fullPath: '/demo02'
-      preLoaderRoute: typeof Demo02IndexRouteImport
+    '/compute-shader/': {
+      id: '/compute-shader/'
+      path: '/compute-shader'
+      fullPath: '/compute-shader'
+      preLoaderRoute: typeof ComputeShaderIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo01/': {
-      id: '/demo01/'
-      path: '/demo01'
-      fullPath: '/demo01'
-      preLoaderRoute: typeof Demo01IndexRouteImport
+    '/atmosphere/': {
+      id: '/atmosphere/'
+      path: '/atmosphere'
+      fullPath: '/atmosphere'
+      preLoaderRoute: typeof AtmosphereIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -104,9 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  Demo01IndexRoute: Demo01IndexRoute,
-  Demo02IndexRoute: Demo02IndexRoute,
-  Demo03IndexRoute: Demo03IndexRoute,
+  AtmosphereIndexRoute: AtmosphereIndexRoute,
+  ComputeShaderIndexRoute: ComputeShaderIndexRoute,
+  SsgiIndexRoute: SsgiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
