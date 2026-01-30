@@ -75,9 +75,9 @@ export const useScene = (elRef: RefObject<HTMLElement | null>) => {
       globe.reorientationPlugin.transformLatLonHeightToOrigin(radians(latitude), radians(longitude), height);
     };
     loadTilesHandle();
-    globe.tilesRenderer.addEventListener('load-tile-set', loadTilesHandle);
+    globe.tilesRenderer.addEventListener('load-tileset', loadTilesHandle);
     return () => {
-      globe.tilesRenderer.removeEventListener('load-tile-set', loadTilesHandle);
+      globe.tilesRenderer.removeEventListener('load-tileset', loadTilesHandle);
     };
   }, [globe]);
 

@@ -7,7 +7,7 @@ import {
   GLTFExtensionsPlugin,
   TileCompressionPlugin,
   UpdateOnChangePlugin,
-} from '3d-tiles-renderer/plugins';
+} from '3d-tiles-renderer/three/plugins';
 
 import { TilesFadePlugin } from '@/plugins/fade/TilesFadePlugin';
 import { TileCreasedNormalsPlugin } from '@/plugins/TileCreasedNormalsPlugin';
